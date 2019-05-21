@@ -1,30 +1,35 @@
 package mrhaki.micronaut;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
+import javax.inject.Inject;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/sample")
 public class HttpBinController {
 
-    private final HttpBinClient client;
+    @Inject
+    private HttpBinClient client;
 
-    public HttpBinController(final HttpBinClient client) {
+    public HttpBinController(HttpBinClient client) {
         this.client = client;
     }
 
-    @GetMapping(value = "/uuid", produces = TEXT_PLAIN_VALUE)
-    Mono<String> uuid() {
-        return client.uuid().map(response -> response.getUuid().toString());
+
+    @GetMapping(value = "/uuid", produces = APPLICATION_JSON_VALUE)
+    ResponseUuidData uuid() {
+        return client.uuid();
     }
 
     @GetMapping(value = "/data")
-    Mono<ResponseData.MessageResponseData> data() {
-        return client.data("Micronaut rocks").map(response -> response.getJson());
+    ResponseData.MessageResponseData data() {
+        return client.data("Micronaut rocks").getJson();
     }
 
 }

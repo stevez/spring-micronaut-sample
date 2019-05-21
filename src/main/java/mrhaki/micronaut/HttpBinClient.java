@@ -2,16 +2,15 @@ package mrhaki.micronaut;
 
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
-import io.micronaut.http.client.Client;
-import reactor.core.publisher.Mono;
+import io.micronaut.http.client.annotation.Client;
 
-@Client("http://httpbin.org")
+@Client(value="${bin.url}", configuration = BinClientConfiguration.class)
 interface HttpBinClient {
     
     @Get("/uuid")
-    Mono<ResponseUuidData> uuid();
+    ResponseUuidData uuid();
     
     @Post("/anything")
-    Mono<ResponseData> data(String message);
+    ResponseData data(String message);
     
 }

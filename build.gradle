@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.4.RELEASE'
+        springBootVersion = '2.1.0.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -26,17 +26,19 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micronaut:bom:1.0.0.M4'
+        mavenBom 'io.micronaut:micronaut-bom:1.1.0'
     }
 }
 
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-webflux')
+    compile("org.yaml:snakeyaml:1.23")
 
-    annotationProcessor "io.micronaut:inject-java"
-    compile "io.micronaut:http-client"
-    compile "io.micronaut:spring"
+    compile "io.micronaut:micronaut-inject"
+    annotationProcessor "io.micronaut:micronaut-inject-java"
+    compile "io.micronaut:micronaut-http-client"
+    compile "io.micronaut:micronaut-spring"
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.projectreactor:reactor-test')

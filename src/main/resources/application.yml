@@ -1,0 +1,13 @@
+micronaut:
+  application:
+    name: bin
+
+
+bin:
+  url: http://httpbin.org
+
+
+proxy:
+  hostname: gateway.bns
+  port: 8000
+  proxyType: http

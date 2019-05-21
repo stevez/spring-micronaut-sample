@@ -1,10 +1,14 @@
 package mrhaki.micronaut;
 
-import io.micronaut.http.client.Client;
+import io.micronaut.context.annotation.ConfigurationProperties;
+import io.micronaut.http.client.annotation.Client;
 import io.micronaut.spring.beans.MicronautBeanProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+
+import javax.inject.Singleton;
 
 @SpringBootApplication
 public class SampleApplication {
